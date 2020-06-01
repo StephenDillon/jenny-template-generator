@@ -1,20 +1,22 @@
 package dillos.jenny.template.generator.api;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Map;
 
 public class Execution {
 
-	private File archive;
+	private String generatedZipName;
+	private InputStream archive;
 	private File outputFolder;
 	private TemplateConfig templateConfig;
 	private Map<String, String> params;
 
-	public File getArchive() {
+	public InputStream getArchive() {
 		return archive;
 	}
 
-	public void setArchive(File archive) {
+	public void setArchive(InputStream archive) {
 		this.archive = archive;
 	}
 
@@ -40,6 +42,14 @@ public class Execution {
 
 	public void setParams(Map<String, String> params) {
 		this.params = params;
+	}
+
+	public String getGeneratedZipName() {
+		return generatedZipName;
+	}
+
+	public void setGeneratedZipName(String generatedZipName) {
+		this.generatedZipName = generatedZipName;
 	}
 
 }

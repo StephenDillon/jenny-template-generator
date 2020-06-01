@@ -1,7 +1,9 @@
 package dillos.jenny.template.generator.api;
 
+import java.io.File;
+
 public interface Generator {
 
-	public void generate(Execution execution);
+	public File generate(Execution execution);
 
 }

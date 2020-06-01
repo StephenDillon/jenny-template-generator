@@ -3,6 +3,7 @@ package dillos.jenny.template.generator.api;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,14 +34,15 @@ class GeneratorTest {
 
 	@Test
 	void testGenerate() throws IOException {
-		generator.generate(setupExecution());
+		File archive = generator.generate(setupExecution());
 
-		assertTrue(outputLocation.listFiles().length > 0);
+		assertTrue(archive.exists());
 	}
 
 	private Execution setupExecution() throws IOException {
 		Execution execution = new Execution();
-		execution.setArchive(archive);
+		execution.setGeneratedZipName("archive");
+		execution.setArchive(new FileInputStream(archive));
 		execution.setOutputFolder(outputLocation);
 		execution.setParams(new HashMap<>());
 		execution.setTemplateConfig(readTemplateConfig());
