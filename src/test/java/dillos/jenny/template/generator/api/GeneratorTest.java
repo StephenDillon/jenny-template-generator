@@ -1,11 +1,13 @@
 package dillos.jenny.template.generator.api;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import com.google.gson.Gson;
 
+import dillos.jenny.template.generator.impl.ExtractTemplateUtil;
 import dillos.jenny.template.generator.impl.GeneratorImpl;
 
 class GeneratorTest {
@@ -37,6 +40,13 @@ class GeneratorTest {
 		File archive = generator.generate(setupExecution());
 
 		assertTrue(archive.exists());
+
+		File extracted = new File(outputLocation, "extracted-archive");
+		ExtractTemplateUtil.extractTemplate(new FileInputStream(archive), extracted);
+
+		File settingsFile = new File(extracted, "settings.gradle");
+		assertTrue(settingsFile.exists());
+		assertEquals("rootProject.name = 'generator-test'", FileUtils.readFileToString(settingsFile, Charset.defaultCharset()).trim());
 	}
 
 	private Execution setupExecution() throws IOException {
@@ -45,6 +55,7 @@ class GeneratorTest {
 		execution.setArchive(new FileInputStream(archive));
 		execution.setOutputFolder(outputLocation);
 		execution.setParams(new HashMap<>());
+		execution.getParams().put("PROJECT_NAME", "generator-test");
 		execution.setTemplateConfig(readTemplateConfig());
 		return execution;
 	}

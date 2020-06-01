@@ -1,0 +1,9 @@
+{
+	"textReplacements": [
+		{
+			"fileRegex": "settings.gradle",
+			"originalText": "test-template",
+			"replacementKey": "PROJECT_NAME"
+		}
+	]
+}
