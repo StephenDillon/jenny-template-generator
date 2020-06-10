@@ -3,6 +3,25 @@
 		{
 			"fileRegex": "settings.gradle",
 			"originalText": "test-template",
+			"replacementText": "%s",
+			"replacementKey": "PROJECT_NAME"
+		},
+		{
+			"fileRegex": "*.java",
+			"originalText": "package dillos.testtemplate;",
+			"replacementText": "package %s;",
+			"replacementKey": "PROJECT_NAME_DOTTED"
+		}
+	],
+	"moveFolders": [
+		{
+			"sourceFolder": "src\\main\\java\\dillos\\testtemplate",
+			"rootTarget": "src\\main\\java",
+			"replacementKey": "PROJECT_NAME"
+		},
+		{
+			"sourceFolder": "src\\test\\java\\dillos\\testtemplate",
+			"rootTarget": "src\\test\\java",
 			"replacementKey": "PROJECT_NAME"
 		}
 	]

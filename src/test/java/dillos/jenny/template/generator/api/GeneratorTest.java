@@ -44,6 +44,7 @@ class GeneratorTest {
 		File extracted = new File(outputLocation, "extracted-archive");
 		ExtractTemplateUtil.extractTemplate(new FileInputStream(archive), extracted);
 
+		System.out.println(extracted.getAbsolutePath());
 		File settingsFile = new File(extracted, "settings.gradle");
 		assertTrue(settingsFile.exists());
 		assertEquals("rootProject.name = 'generator-test'", FileUtils.readFileToString(settingsFile, Charset.defaultCharset()).trim());
@@ -56,6 +57,7 @@ class GeneratorTest {
 		execution.setOutputFolder(outputLocation);
 		execution.setParams(new HashMap<>());
 		execution.getParams().put("PROJECT_NAME", "generator-test");
+		execution.getParams().put("PROJECT_NAME_DOTTED", "generator.test");
 		execution.setTemplateConfig(readTemplateConfig());
 		return execution;
 	}

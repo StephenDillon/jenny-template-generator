@@ -2,7 +2,15 @@ package dillos.jenny.template.generator.api;
 
 public class TextReplace {
 
-	private String fileRegex, originalText, replacementKey;
+	private String fileRegex, originalText, replacementKey, replacementText;
+
+	public String getReplacementText() {
+		return replacementText;
+	}
+
+	public void setReplacementText(String replacementText) {
+		this.replacementText = replacementText;
+	}
 
 	public String getFileRegex() {
 		return fileRegex;

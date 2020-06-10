@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 
 import dillos.jenny.template.generator.api.Execution;
 import dillos.jenny.template.generator.api.Generator;
+import dillos.jenny.template.generator.api.MoveFolder;
 import dillos.jenny.template.generator.api.TemplateConfig;
 import dillos.jenny.template.generator.api.TextReplace;
 import net.lingala.zip4j.ZipFile;
@@ -35,6 +36,9 @@ public class GeneratorImpl implements Generator {
 		TemplateConfig config = execution.getTemplateConfig();
 		for (TextReplace textReplace : config.getTextReplacements()) {
 			TextReplacementService.replaceText(workingLocation, execution, textReplace);
+		}
+		for (MoveFolder moveFolder : config.getMoveFolders()) {
+			MoveFolderService.moveFolder(workingLocation, execution, moveFolder);
 		}
 	}
 

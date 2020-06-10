@@ -14,13 +14,12 @@ import dillos.jenny.template.generator.api.TextReplace;
 
 public class TextReplacementService {
 
-	public static void replaceText(File workingFolder, Execution execution, TextReplace textReplace)
-			throws IOException {
+	public static void replaceText(File workingFolder, Execution execution, TextReplace textReplace) throws IOException {
 		Collection<File> files = FileUtils.listFiles(workingFolder, new RegexFileFilter("^(.*?)"), TrueFileFilter.TRUE);
 		for (File file : files) {
 			String content = FileUtils.readFileToString(file, Charset.defaultCharset());
-			String updatedContext = content.replaceAll(textReplace.getOriginalText(),
-					execution.getParams().get(textReplace.getReplacementKey()));
+			String replacementText = String.format(textReplace.getReplacementText(), execution.getParams().get(textReplace.getReplacementKey()));
+			String updatedContext = content.replaceAll(textReplace.getOriginalText(), replacementText);
 
 			FileUtils.write(file, updatedContext, Charset.defaultCharset());
 		}
